@@ -1,6 +1,8 @@
 package com.microservice.loja.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.microservice.loja.dto.LojaDto;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/loja")
 public class lojaController {
 
-    @GetMapping("/teste")
-    public String olaTeste(){
-        return "Teste executado com sucesso";
+    @PostMapping("/insert")
+    public LojaDto insertLoja(@RequestBody LojaDto lojaDto){
+        System.out.println(lojaDto);
+        return lojaDto;
     }
+
 }
 
