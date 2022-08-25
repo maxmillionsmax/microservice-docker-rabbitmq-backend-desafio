@@ -5,6 +5,8 @@ import com.microservice.loja.repository.LojaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LojaService {
 
@@ -17,5 +19,14 @@ public class LojaService {
 
     public Loja insertLoja(Loja loja){
         return lojaRepository.save(loja);
+    }
+
+    public Loja updateLoja(Loja loja){
+        Optional<Loja> newLoja = lojaRepository.findById(loja.getId());
+        if (newLoja.isPresent()){
+            return lojaRepository.save(loja);
+        }else {
+            return null;
+        }
     }
 }

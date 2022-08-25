@@ -5,10 +5,9 @@ import com.microservice.loja.entity.Loja;
 import com.microservice.loja.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 
 @RestController
@@ -23,10 +22,23 @@ public class LojaController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity insertLoja(@RequestBody LojaDto lojaDto){
+    public ResponseEntity insertLoja(@RequestBody LojaDto lojaDto) {
 
-        return ResponseEntity.ok(lojaService.insertLoja(Loja.create(lojaDto)));
+        try {
+            return ResponseEntity.ok(lojaService.insertLoja(Loja.create(lojaDto)));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateLoja(@PathVariable("id") Long id, @RequestBody LojaDto lojaDto){
 
+        Loja loja = Loja.create(lojaDto);
+        loja.setId(id);
+        Loja updateLoja =  lojaService.updateLoja(loja);
+        return Objects.nonNull(updateLoja) ?
+                ResponseEntity.ok(updateLoja) :
+                ResponseEntity.notFound().build();
+    }
 }
 
