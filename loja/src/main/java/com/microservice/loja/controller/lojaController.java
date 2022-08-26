@@ -40,5 +40,12 @@ public class LojaController {
                 ResponseEntity.ok(updateLoja) :
                 ResponseEntity.notFound().build();
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteLoja(@PathVariable("id") Long id){
+
+        return lojaService.deleteLoja(id) ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.notFound().build();
+    }
 }
 

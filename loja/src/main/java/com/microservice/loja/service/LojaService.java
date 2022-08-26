@@ -29,4 +29,15 @@ public class LojaService {
             return null;
         }
     }
+    public boolean deleteLoja(Long id){
+
+        Optional<Loja> loja = lojaRepository.findById(id);
+        if (loja.isPresent()){
+            lojaRepository.delete(loja.get());
+            return true;
+        }else {
+            return false;
+        }
+
+    }
 }
