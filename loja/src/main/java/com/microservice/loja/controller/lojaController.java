@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.Optional;
 
 
 @RestController
@@ -45,6 +46,14 @@ public class LojaController {
 
         return lojaService.deleteLoja(id) ?
                 ResponseEntity.ok().build() :
+                ResponseEntity.notFound().build();
+    }
+    @GetMapping("/find/{id}")
+    public ResponseEntity findById(@PathVariable("id") Long id){
+
+        Optional<Loja> loja =  lojaService.findById(id);
+        return loja.isPresent() ?
+                ResponseEntity.ok(loja.get()) :
                 ResponseEntity.notFound().build();
     }
 }

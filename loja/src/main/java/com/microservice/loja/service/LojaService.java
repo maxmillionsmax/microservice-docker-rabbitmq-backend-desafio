@@ -38,6 +38,8 @@ public class LojaService {
         }else {
             return false;
         }
-
+    }
+    public Optional<Loja> findById(Long id){
+        return lojaRepository.findById(id);
     }
 }
