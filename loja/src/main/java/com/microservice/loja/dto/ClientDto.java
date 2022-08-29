@@ -7,9 +7,9 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class LojaDto {
+public class ClientDto {
 
     private String nome;
     private String endereco;
-    private String cnpj;
+    private String cpf;
 }
