@@ -1,5 +1,6 @@
 package com.microservice.loja.service;
 
+import com.microservice.loja.dto.ClientOrderDto;
 import com.microservice.loja.entity.Client;
 import com.microservice.loja.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,17 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
+
     @Autowired
     public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
+
     }
 
 
     public Client insertClient(Client client){
-        return clientRepository.save(client);
+        Client newClient = clientRepository.save(client);
+         return newClient;
     }
 
     public Client updateClient(Client client){
